@@ -85,6 +85,7 @@ int Ford_Fulkerson(int s, int t) {
             rG[v][u] += path_flow;
         }
 
+        //Max out from source or max in to destination
         max_flow += path_flow;
     }
 
@@ -107,7 +108,6 @@ int main() {
         rG[u][v] = w;
     }
 
-    
     cout << Ford_Fulkerson(s, t);
     return 0;
 
