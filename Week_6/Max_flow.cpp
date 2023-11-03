@@ -50,7 +50,8 @@ bool BFS(int s, int t) {
         q.pop();
 
         for(int v = 1; v <= n; v++) {
-            if(!visited[v] && rG[u][v] > 0) {
+            //v is not visited and exist a path from u->v on the residual graph
+            if(!visited[v] && rG[u][v] > 0) { 
                 if(v == t) {
                     parent[t] = u;
                     return true;
@@ -72,11 +73,12 @@ int Ford_Fulkerson(int s, int t) {
 
     while(BFS(s, t)) {
         int path_flow = INT_MAX;
+        //reverse tracking from t->s
         for(v = t; v != s; v = parent[v]) {
             u = parent[v];
             path_flow = min(path_flow, rG[u][v]);
         }
-
+        //reverse the capacity in residual graph
         for(v = t; v != s; v = parent[v]) {
             u = parent[v];
             rG[u][v] -= path_flow;
